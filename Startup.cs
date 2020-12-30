@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ReservationApp.Models;
 using Microsoft.EntityFrameworkCore;
+using ReservationApp.Data;
 
 namespace ReservationApp
 {
@@ -22,6 +23,10 @@ namespace ReservationApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // Add scoped dependency injection for repository
+            services.AddScoped<IReservationRepo, SQLReservationRepo>();
+            // Configure Postgresql server for App
             services.AddDbContext<ReservationContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ReservationContext")));
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

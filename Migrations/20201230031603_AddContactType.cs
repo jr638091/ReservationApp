@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ReservationApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class AddContactType : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

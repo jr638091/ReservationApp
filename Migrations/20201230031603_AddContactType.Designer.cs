@@ -9,8 +9,8 @@ using ReservationApp.Models;
 namespace ReservationApp.Migrations
 {
     [DbContext(typeof(ReservationContext))]
-    [Migration("20201229225342_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201230031603_AddContactType")]
+    partial class AddContactType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,7 @@ namespace ReservationApp.Migrations
                         .UseIdentityByDefaultColumn();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
