@@ -11,17 +11,26 @@ namespace ReservationApp.Data {
             _context = context;
         }
 
-        public void CreateContactType(ContactType contactType)
+        public bool saveChage()
+        {
+            return (_context.SaveChanges() > 0);
+        }
+
+        
+
+        #region Contact Type Methods
+
+        public void CreateContactTypes (ContactType contactType)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<ContactType> ListContactType()
+        public IEnumerable<ContactType> ListContactTypes ()
         {
             return _context.ContactTypes.ToList();
         }
 
-        public void PartialUpdateContactType(int id, ContactType contactType)
+        public void PartialUpdateContactType (int id, ContactType contactType)
         {
             throw new System.NotImplementedException();
         }
@@ -31,14 +40,43 @@ namespace ReservationApp.Data {
             return _context.ContactTypes.FirstOrDefault(p => p.Id == id);
         }
 
-        public bool saveChage()
-        {
-            return (_context.SaveChanges() > 0);
-        }
-
         public void UpdateContactType(int id, ContactType contactType)
         {
             throw new System.NotImplementedException();
         }
+
+        public void CreateContactType(ContactType contactType)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
+        #region Contac Methods
+        public IEnumerable<Contact> ListContacts()
+        {
+            return _context.Contacts.ToList();
+        }
+
+        public Contact ReadContact(int id)
+        {
+            return _context.Contacts.FirstOrDefault(contact => contact.Id == id);
+        }
+
+        public void CreateContact(Contact contactType)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateContact(int id, Contact contactType)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void PartialUpdateContact(int id, Contact contactType)
+        {
+            throw new System.NotImplementedException();
+        }
+        #endregion
     }
 }
