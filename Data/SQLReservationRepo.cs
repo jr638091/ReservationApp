@@ -3,7 +3,7 @@ using System.Linq;
 using ReservationApp.Models;
 
 namespace ReservationApp.Data {
-    public class SQLReservationRepo : IReservationRepo
+    public class SQLReservationRepo : IReservationAppRepo
     {
         private readonly ReservationContext _context;
 
@@ -74,6 +74,33 @@ namespace ReservationApp.Data {
         }
 
         public void PartialUpdateContact(int id, Contact contactType)
+        {
+            throw new System.NotImplementedException();
+        }
+        #endregion
+    
+        #region Reservation Methods
+        public IEnumerable<Reservation> ListReservations()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Reservation ReadReservation(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void CreateReservation(Reservation reservation)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateReservation(int id, Reservation reservation)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void PartialUpdateReservation(int id, Reservation reservation)
         {
             throw new System.NotImplementedException();
         }

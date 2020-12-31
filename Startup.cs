@@ -25,7 +25,7 @@ namespace ReservationApp
             services.AddControllersWithViews();
 
             // Add scoped dependency injection for repository
-            services.AddScoped<IReservationRepo, SQLReservationRepo>();
+            services.AddScoped<IReservationAppRepo, SQLReservationRepo>();
             // Configure Postgresql server for App
             services.AddDbContext<ReservationContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ReservationContext")));
             // In production, the Angular files will be served from this directory
