@@ -1,0 +1,14 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home-mobile',
+  templateUrl: './home-mobile.component.html',
+  styleUrls: ['./home-mobile.component.css']
+})
+export class HomeMobileComponent{
+  order : Object = null
+  updateOrderSelector (value) {
+    console.log(value)
+    this.order = value
+  }
+}
