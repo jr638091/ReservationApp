@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using ReservationApp.Models;
 using Microsoft.EntityFrameworkCore;
 using ReservationApp.Data;
+using AutoMapper;
+using System;
 
 namespace ReservationApp
 {
@@ -24,6 +26,8 @@ namespace ReservationApp
         {
             services.AddControllersWithViews();
 
+            // Add AutoMapper For DTO
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // Add scoped dependency injection for repository
             services.AddScoped<IReservationAppRepo, SQLReservationRepo>();
             // Configure Postgresql server for App

@@ -7,6 +7,6 @@ namespace ReservationApp.Models {
         public long Id {get; set;}
         [Required]
         public string Name { get; set; }
-        public List<Contact> Contacts { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
     }
 }

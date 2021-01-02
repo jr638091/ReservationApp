@@ -7,12 +7,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SelectorInputComponent {
   @Input() options: Array<Object>;
-  @Output() stateChange = new EventEmitter<Object>()
+  @Output() updateValue = new EventEmitter<Object>()
+  @Input()
+  get value() : Object | String | Number { return this.state; }
+  set value(value: Object | String | Number) {
+    this.state = value;
+  }
+
 
   state: Object | String | Number = null;
 
-  changeSelection (value) {
+  changeState (value) {
     this.state = value
-    this.stateChange.emit(value)
+    this.updateValue.emit(value)
   }
 }

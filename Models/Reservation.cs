@@ -29,7 +29,6 @@ namespace ReservationApp.Models {
         [Required]
         public long ContactId { get; set; }
 
-        [Required]
-        public Contact Contact { get; set; }
+        public virtual Contact Contact { get; set; }
     }
 }

@@ -11,6 +11,6 @@
 
   </button>
   <div class="dropdown-menu w-100" aria-labelledby="selectorButton">
-    <button class="dropdown-item" *ngFor="let option of options" (click)="changeSelection(option)"> {{ option['label'] }} </button>
+    <button class="dropdown-item" *ngFor="let option of options" (click)="changeState(option)"> {{ option['label'] }} </button>
   </div>
 </div>

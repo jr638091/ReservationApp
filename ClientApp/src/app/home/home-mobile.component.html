@@ -7,7 +7,7 @@
         </h2>
       </div>
     </div>
-    <app-selector [options]="[{ value: 1, label: 1 }]" (stateChange)="updateOrderSelector($event)"></app-selector>
+    <app-selector [options]="[{ value: 1, label: 1 }]" (updateValue)="updateOrderSelector($event)"></app-selector>
   </div>
 </div>
 <div class="container">
