@@ -41,9 +41,9 @@ namespace ReservationApp.Data
 
         #region Contact Type Methods
 
-        public IEnumerable<ContactType> ListContactTypes()
+        public IQueryable<ContactType> ListContactTypes()
         {
-            return _context.ContactTypes.ToList();
+            return _context.ContactTypes.AsQueryable();
         }
 
         public ContactType ReadContactType(long id)
@@ -77,9 +77,9 @@ namespace ReservationApp.Data
         #endregion
 
         #region Contac Methods
-        public IEnumerable<Contact> ListContacts()
+        public IQueryable<Contact> ListContacts()
         {
-            return _context.Contacts.Include(c => c.ContactType).ToList();
+            return _context.Contacts.Include(c => c.ContactType).AsQueryable();
         }
 
         public Contact ReadContact(long id)
@@ -113,9 +113,9 @@ namespace ReservationApp.Data
         #endregion
 
         #region Reservation Methods
-        public IEnumerable<Reservation> ListReservations()
+        public IQueryable<Reservation> ListReservations()
         {
-            return _context.Reservations.ToList();
+            return _context.Reservations.AsQueryable();
         }
 
         public Reservation ReadReservation(long id)

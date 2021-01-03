@@ -5,6 +5,8 @@ using ReservationApp.Data;
 using ReservationApp.Models;
 using ReservationApp.Dtos;
 using Microsoft.AspNetCore.JsonPatch;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace ReservationApp.Controllers {
     [ApiController]
@@ -21,8 +23,50 @@ namespace ReservationApp.Controllers {
 
         [HttpGet]
         public ActionResult<IEnumerable<ContactTypeReadDto>> GetContactTypes () {
-            var items = _repository.ListContactTypes();
-            return Ok(_mapper.Map<IEnumerable<ContactTypeReadDto>>(items));
+            int initial = 1;
+            int count = -1;
+            string orderAttr = "Id";
+            bool descending = false;
+            var queryParams = HttpContext.Request.Query;
+            if (queryParams.Keys.Contains("descending"))
+            {
+                descending = bool.Parse(queryParams["descending"]);
+            }
+            if (queryParams.Keys.Contains("initial"))
+            {
+                initial = int.Parse(queryParams["initial"]);
+            }
+            if (queryParams.Keys.Contains("count"))
+            {
+                count = int.Parse(queryParams["count"]);
+            }
+            if (queryParams.Keys.Contains("order"))
+            {
+                orderAttr = typeof(ContactType).GetProperty(orderAttr) != null ? queryParams["order"] : "Id";
+            }
+            IQueryable<ContactType> query = _repository.ListContactTypes();
+            query = query.OrderBy(orderAttr);
+
+            if (descending)
+            {
+                query = query.Reverse();
+            }
+            int countItems = query.Count();
+            // ICollection<ContactType> items = query.ToList();
+            if (count > 0)
+            {
+                if (initial > countItems)
+                {
+                    return Ok(new PaginationResult<ContactTypeReadDto>(new List<ContactTypeReadDto>(), countItems, 0, initial));
+                }
+                else
+                {
+                    query = query.Skip(initial - 1).Take(count);
+                }
+            }
+            ICollection<ContactType> items = query.ToList();
+            PaginationResult<ContactTypeReadDto> result = new PaginationResult<ContactTypeReadDto>(_mapper.Map<ICollection<ContactTypeReadDto>>(items), countItems, items.Count, 1);
+            return Ok(result);
         }
 
         [HttpGet("{id}", Name = "GetContactTypeById")]

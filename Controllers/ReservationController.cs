@@ -5,6 +5,8 @@ using ReservationApp.Data;
 using ReservationApp.Models;
 using ReservationApp.Dtos;
 using Microsoft.AspNetCore.JsonPatch;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace ReservationApp.Controllers
 {
@@ -24,8 +26,50 @@ namespace ReservationApp.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ReservationReadDto>> GetReservations()
         {
-            var items = _repository.ListReservations();
-            return Ok(_mapper.Map<IEnumerable<ReservationReadDto>>(items));
+            int initial = 1;
+            int count = -1;
+            string orderAttr = "Id";
+            bool descending = false;
+            var queryParams = HttpContext.Request.Query;
+            if (queryParams.Keys.Contains("descending"))
+            {
+                descending = bool.Parse(queryParams["descending"]);
+            }
+            if (queryParams.Keys.Contains("initial"))
+            {
+                initial = int.Parse(queryParams["initial"]);
+            }
+            if (queryParams.Keys.Contains("count"))
+            {
+                count = int.Parse(queryParams["count"]);
+            }
+            if (queryParams.Keys.Contains("order"))
+            {
+                orderAttr = typeof(Reservation).GetProperty(orderAttr) != null ? queryParams["order"] : "Id";
+            }
+            IQueryable<Reservation> query = _repository.ListReservations();
+            query = query.OrderBy(orderAttr);
+
+            if (descending)
+            {
+                query = query.Reverse();
+            }
+            int countItems = query.Count();
+            // ICollection<Reservation> items = query.ToList();
+            if (count > 0)
+            {
+                if (initial > countItems)
+                {
+                    return Ok(new PaginationResult<ReservationReadDto>(new List<ReservationReadDto>(), countItems, 0, initial));
+                }
+                else
+                {
+                    query = query.Skip(initial - 1).Take(count);
+                }
+            }
+            ICollection<Reservation> items = query.ToList();
+            PaginationResult<ReservationReadDto> result = new PaginationResult<ReservationReadDto>(_mapper.Map<ICollection<ReservationReadDto>>(items), countItems, items.Count, 1);
+            return Ok(result);
         }
 
         [HttpGet("{id}", Name = "GetReservationById")]
