@@ -40,9 +40,16 @@ namespace ReservationApp.Dtos {
         [Required]
         public string Title { get; set; }
 
-        [DataType(DataType.DateTime, ErrorMessage = "Invalid DateFormat")]
         [Required]
-        public DateTime? TargetDate { get; set; }
+        [DateFormat]
+        public string ReservationDate { get; set; }
+        public DateTime TargetDate { 
+            get { 
+                return DateTime.Parse(this.ReservationDate);
+            } 
+            set {
+                ReservationDate = value.ToString("yyyy-MM-ddTHH:mm");
+            } }
 
         [Range(1, 5)]
         public decimal? Rating { get; set; }
@@ -51,5 +58,18 @@ namespace ReservationApp.Dtos {
 
         [Required]
         public long? ContactId { get; set; }
+
+        public class DateFormat : ValidationAttribute {
+            public string GetErrorMessage () => "Invalid Date Time. Required format yyyy-MM-ddTHH:mm";
+
+            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            {
+                DateTime date;
+                if(DateTime.TryParseExact(value as String, "yyyy-MM-ddTHH:mm", null, System.Globalization.DateTimeStyles.None, out date)) {
+                    return ValidationResult.Success;
+                }
+                return new ValidationResult(GetErrorMessage());
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace ReservationApp.Profiles {
             CreateMap<Contact, ContactReadDto>();
             CreateMap<Contact, ContactWithReservationsDto>();
             CreateMap<ContactCreateDto, Contact>();
+            CreateMap<Contact, ContactCreateDto>();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ReservationApp.Dtos {
         public DateTime BirthdayDate { get; set; }
         public ContactTypeReadDto ContactType { get; set; }
         public string PhoneNumber { get; set; }
-        public ICollection<Reservation> Reservations { get; set; }
+        public ICollection<ReservationReadDto> Reservations { get; set; }
     }
 
     public class ContactReadDto {

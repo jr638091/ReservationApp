@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using ReservationApp.Data;
 using AutoMapper;
 using System;
+using Newtonsoft.Json.Serialization;
 
 namespace ReservationApp
 {
@@ -24,7 +25,10 @@ namespace ReservationApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            // Add Newtonsoft serialization for Patch Requests
+            services.AddControllers().AddNewtonsoftJson(s => {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             // Add AutoMapper For DTO
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

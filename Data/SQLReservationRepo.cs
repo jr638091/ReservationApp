@@ -59,14 +59,9 @@ namespace ReservationApp.Data
             _context.ContactTypes.Add(contactType);
         }
 
-        public void PartialUpdateContactType(long id, ContactType contactType)
+        public void UpdateContactType(ContactType contactType)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void UpdateContactType(long id, ContactType contactType)
-        {
-            throw new System.NotImplementedException();
+            // Nothing to do thank to EF
         }
 
         public bool DeleteContactType(long id)
@@ -100,14 +95,9 @@ namespace ReservationApp.Data
             _context.Contacts.Add(contact);
         }
 
-        public void UpdateContact(long id, Contact contact)
+        public void UpdateContact(Contact contact)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void PartialUpdateContact(long id, Contact contact)
-        {
-            throw new System.NotImplementedException();
+            // Nothing to do thanks to EF
         }
 
         public bool DeleteContact(long id)
@@ -142,14 +132,9 @@ namespace ReservationApp.Data
             _context.Reservations.Add(reservation);
         }
 
-        public void UpdateReservation(long id, Reservation reservation)
+        public void UpdateReservation(Reservation reservation)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void PartialUpdateReservation(long id, Reservation reservation)
-        {
-            throw new System.NotImplementedException();
+            // Nothing to do thanks to EF
         }
 
         public bool DeleteReservation(long id)

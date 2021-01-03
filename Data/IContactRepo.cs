@@ -6,8 +6,7 @@ namespace ReservationApp.Data {
         IEnumerable<Contact> ListContacts ();
         Contact ReadContact (long id);
         void CreateContact (Contact contactType);
-        void UpdateContact (long id, Contact contactType);
-        void PartialUpdateContact (long id, Contact contactType);
+        void UpdateContact (Contact contactType);
         bool DeleteContact(long id);
     }
 }

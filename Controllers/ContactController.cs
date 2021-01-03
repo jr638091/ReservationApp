@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReservationApp.Data;
 using ReservationApp.Models;
 using ReservationApp.Dtos;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ReservationApp.Controllers {
     [ApiController]
@@ -37,6 +38,41 @@ namespace ReservationApp.Controllers {
             _repository.saveChange();
             ContactWithReservationsDto contactWithReservationsDto = _mapper.Map<ContactWithReservationsDto>(_repository.ReadContact(contactModel.Id));
             return CreatedAtRoute(nameof(GetContactById), new {Id = contactWithReservationsDto.Id}, contactWithReservationsDto);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateContact(long id, ContactCreateDto contact) {
+            var contactModel = _repository.ReadContact(id);
+            if (contactModel == null) {
+                return NotFound();
+            }
+            _mapper.Map(contact, contactModel);
+            _repository.UpdateContact(contactModel);
+            _repository.saveChange();
+
+            return NoContent();
+
+        }
+
+        [HttpPatch("{id}")]
+        public ActionResult PartialUpdateContact(long id, JsonPatchDocument<ContactCreateDto> patchDoc) {
+            var contactModel = _repository.ReadContact(id);
+            if (contactModel == null) {
+                return NotFound();
+            }
+
+            var contactToPatch = _mapper.Map<ContactCreateDto>(contactModel);
+            patchDoc.ApplyTo(contactToPatch, ModelState);
+
+            if(!TryValidateModel(contactToPatch)) {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(contactToPatch, contactModel);
+            _repository.UpdateContact(contactModel);
+            _repository.saveChange();
+
+            return NoContent();
         }
     } 
 }
