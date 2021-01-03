@@ -1,0 +1,22 @@
+.row-even {
+  background-color: rgba(211, 211, 211, 0.2);
+}
+
+.row-odd {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
+
+h2 {
+  font-size: 1.5em;
+}
+
+label.fav-text {
+  font-weight: lighter;
+  font-size: x-small;
+  color: black;
+}
+
+label.favorited {
+  color: gray;
+}

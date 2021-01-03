@@ -14,6 +14,7 @@ import { NavMenuMobileComponent } from './nav-menu/nav-menu-mobile.component';
 import { HomeDesktopComponent } from './home/home-desktop.component';
 import { HomeMobileComponent } from './home/home-mobile.component';
 import { SelectorInputComponent } from './input/selector/selector.component';
+import { ReservationService } from 'src/Services/ReservationService';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { SelectorInputComponent } from './input/selector/selector.component';
       { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [],
+  providers: [ReservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

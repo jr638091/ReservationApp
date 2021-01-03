@@ -1,13 +1,13 @@
 <div class="dropdown">
-  <button class="btn btn-outline-secondary w-100" style="color: grey; border-color: lightGrey;" type="button"
+  <button class="btn w-100" style="color: grey; border-color: lightGrey;" type="button"
     id="selectorButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <div class="row justify-content-between">
-      <div class="col-auto">
+      <div class="col-10">
         <div class="row justify-content-begin align-items-center">
-          <div class="col-2 px-2 pr-3">
+          <div class="col-2">
             <ng-content></ng-content>
           </div>
-          <div class="col-auto">
+          <div class="col-auto px-0">
             <label class="font-weight-light m-0 p-0">
               {{ state === null ? 'Sort by' : state['label'] }}
             </label>
@@ -21,7 +21,10 @@
 
   </button>
   <div class="dropdown-menu w-100" aria-labelledby="selectorButton">
-    <button class="dropdown-item" *ngFor="let option of options" (click)="changeState(option)"> {{ option['label'] }}
+    <button class="dropdown-item" *ngFor="let option of options" (click)="changeState(option)">
+      <label style="color: gray;" class="font-weight-lighter">
+        {{ option['label'] }}
+      </label>
     </button>
   </div>
 </div>

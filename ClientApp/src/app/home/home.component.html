@@ -1,2 +1,2 @@
-<app-home-desktop class="d-none d-md-block" ></app-home-desktop>
-<app-home-mobile class="d-md-none" [reservations]="reservations"></app-home-mobile>
+<app-home-desktop class="d-none d-md-block" [reservations]="reservations" (changeOrder)="changeOrder($event)" (updateFavorite)="isFavoriteToogler($event)" (updateRating)="rate($event)"></app-home-desktop>
+<app-home-mobile class="d-md-none" [reservations]="reservations" (changeOrder)="changeOrder($event)" (updateFavorite)="isFavoriteToogler($event)"></app-home-mobile>
