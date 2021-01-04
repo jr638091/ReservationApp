@@ -1,0 +1,22 @@
+<div class="w-100 m-0 bg-white">
+  <div class="container py-3">
+    <div class="">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-auto text-danger">
+          <ng-content select="h2"></ng-content>
+
+        </div>
+        <div class="col-0 col-md-4 col-lg-6 text-wrap font-weight-light text-muted d-none d-md-block">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, voluptatum ex. Consequatur qui inventore
+          officiis
+          quod atque ratione molestiae?
+        </div>
+        <div class="col-auto">
+          <ng-content select="div"></ng-content>
+        </div>
+      </div>
+      <ng-content></ng-content>
+    </div>
+
+  </div>
+</div>

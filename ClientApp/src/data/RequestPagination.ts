@@ -1,6 +1,8 @@
 interface Pagination< T >{
-  hits: Number
-  count: Number
-  initial: Number
+  hits: number
+  count: number
+  pageIndex: number
+  nextPage: string
+  previousPage: string
   results: Array<T>
 }

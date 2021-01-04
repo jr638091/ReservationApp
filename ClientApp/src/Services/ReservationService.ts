@@ -19,4 +19,8 @@ export class ReservationService {
   partialUpdate(id: Number, patch: Object, options: Object = {}) {
     return this.httpClient.patch(this.url + `/${id}`, patch, options)
   }
+
+  create(reservation: Reservation): Observable<Reservation> {
+    return this.httpClient.post<Reservation>(this.url, reservation)
+  }
 }

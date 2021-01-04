@@ -7,11 +7,14 @@ using ReservationApp.Dtos;
 using Microsoft.AspNetCore.JsonPatch;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System;
 
-namespace ReservationApp.Controllers {
+namespace ReservationApp.Controllers
+{
     [ApiController]
     [Route("contact-type")]
-    public class ContactTypeController: ControllerBase {
+    public class ContactTypeController : ControllerBase
+    {
         private readonly IReservationAppRepo _repository;
         private readonly IMapper _mapper;
 
@@ -22,28 +25,13 @@ namespace ReservationApp.Controllers {
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ContactTypeReadDto>> GetContactTypes () {
-            int initial = 1;
-            int count = -1;
-            string orderAttr = "Id";
-            bool descending = false;
-            var queryParams = HttpContext.Request.Query;
-            if (queryParams.Keys.Contains("descending"))
-            {
-                descending = bool.Parse(queryParams["descending"]);
-            }
-            if (queryParams.Keys.Contains("initial"))
-            {
-                initial = int.Parse(queryParams["initial"]);
-            }
-            if (queryParams.Keys.Contains("count"))
-            {
-                count = int.Parse(queryParams["count"]);
-            }
-            if (queryParams.Keys.Contains("order"))
-            {
-                orderAttr = typeof(ContactType).GetProperty(orderAttr) != null ? queryParams["order"] : "Id";
-            }
+        public ActionResult<IEnumerable<ContactTypeReadDto>> GetContactTypes([FromQuery] OrderQuery orderQuery, [FromQuery] PaginationQuery paginationQuery)
+        {
+            string orderAttr;
+            bool descending = orderQuery.Descending;
+            if (orderQuery.Order != null)
+                orderAttr = typeof(ContactType).GetProperty(orderQuery.Order) != null ? orderQuery.Order : "Id";
+            else orderAttr = "Id";
             IQueryable<ContactType> query = _repository.ListContactTypes();
             query = query.OrderBy(orderAttr);
 
@@ -53,43 +41,52 @@ namespace ReservationApp.Controllers {
             }
             int countItems = query.Count();
             // ICollection<ContactType> items = query.ToList();
-            if (count > 0)
+
+            if (paginationQuery.PageIndex > 0)
             {
-                if (initial > countItems)
+                var paginated = query.PageResult(paginationQuery.PageIndex, paginationQuery.Count);
+                string next = paginationQuery.PageIndex
+                              >= paginated.PageCount ? null : $"{HttpContext.Request.Path}?pageIndex={paginated.CurrentPage + 1}&count={paginated.PageSize}";
+                string prev = paginationQuery.PageIndex
+                              <= 1 ? null : $"{HttpContext.Request.Path}?pageIndex={paginated.CurrentPage - 1}&count={paginationQuery.Count}";
+                if (orderQuery.Order != null)
                 {
-                    return Ok(new PaginationResult<ContactTypeReadDto>(new List<ContactTypeReadDto>(), countItems, 0, initial));
+                    next = next != null ? next + $"&order={orderQuery.Order}&descending={orderQuery.Descending}" : next;
+                    prev = prev != null ? prev + $"&order={orderQuery.Order}&descending={orderQuery.Descending}" : prev;
                 }
-                else
-                {
-                    query = query.Skip(initial - 1).Take(count);
-                }
+
+                return Ok(new PaginationResult<ContactTypeReadDto>(_mapper.Map<ICollection<ContactTypeReadDto>>(paginated.Queryable.ToList()), countItems, paginated.PageSize, paginated.CurrentPage, next, prev));
             }
             ICollection<ContactType> items = query.ToList();
-            PaginationResult<ContactTypeReadDto> result = new PaginationResult<ContactTypeReadDto>(_mapper.Map<ICollection<ContactTypeReadDto>>(items), countItems, items.Count, 1);
+            PaginationResult<ContactTypeReadDto> result = new PaginationResult<ContactTypeReadDto>(_mapper.Map<ICollection<ContactTypeReadDto>>(items), countItems, items.Count, 0, null, null);
             return Ok(result);
         }
 
         [HttpGet("{id}", Name = "GetContactTypeById")]
-        public ActionResult<ContactReadDto> GetContactTypeById (long id) {
+        public ActionResult<ContactReadDto> GetContactTypeById(long id)
+        {
             var contactType = _repository.ReadContactType(id);
             return contactType == null ? NotFound() : Ok(_mapper.Map<ContactTypeWithContactsDto>(contactType));
         }
 
         [HttpPost]
-        public ActionResult<ContactTypeWithContactsDto> PostContactType (ContactTypeCreateDto contactType) {
+        public ActionResult<ContactTypeWithContactsDto> PostContactType(ContactTypeCreateDto contactType)
+        {
             var contactTypeModel = _mapper.Map<ContactType>(contactType);
             _repository.CreateContactType(contactTypeModel);
             _repository.saveChange();
 
             var ContactTypeWithContactsDto = _mapper.Map<ContactTypeWithContactsDto>(contactTypeModel);
 
-            return CreatedAtRoute(nameof(GetContactTypeById), new {Id = ContactTypeWithContactsDto.Id}, ContactTypeWithContactsDto );
+            return CreatedAtRoute(nameof(GetContactTypeById), new { Id = ContactTypeWithContactsDto.Id }, ContactTypeWithContactsDto);
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateContactType(long id, ContactTypeCreateDto contactType) {
+        public ActionResult UpdateContactType(long id, ContactTypeCreateDto contactType)
+        {
             var contactTypeModel = _repository.ReadContactType(id);
-            if (contactTypeModel == null) {
+            if (contactTypeModel == null)
+            {
                 return NotFound();
             }
             _mapper.Map(contactType, contactTypeModel);
@@ -100,16 +97,19 @@ namespace ReservationApp.Controllers {
         }
 
         [HttpPatch("{id}")]
-        public ActionResult PartialUpdateContactType(long id, JsonPatchDocument<ContactTypeCreateDto> patchDoc) {
+        public ActionResult PartialUpdateContactType(long id, JsonPatchDocument<ContactTypeCreateDto> patchDoc)
+        {
             var contactTypeModel = _repository.ReadContactType(id);
-            if (contactTypeModel == null) {
+            if (contactTypeModel == null)
+            {
                 return NotFound();
             }
 
             var contactTypeToPatch = _mapper.Map<ContactTypeCreateDto>(contactTypeModel);
             patchDoc.ApplyTo(contactTypeToPatch, ModelState);
 
-            if(!TryValidateModel(contactTypeToPatch)) {
+            if (!TryValidateModel(contactTypeToPatch))
+            {
                 return ValidationProblem(ModelState);
             }
 
@@ -119,5 +119,5 @@ namespace ReservationApp.Controllers {
 
             return NoContent();
         }
-    } 
+    }
 }

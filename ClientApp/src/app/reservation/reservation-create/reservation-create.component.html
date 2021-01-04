@@ -1,0 +1,42 @@
+<app-home-top-banner>
+  <h2>Create your reservation</h2>
+  <div>
+    <a [routerLink]="['/']" role="button" class="btn btn-secondary text-uppercase d-none d-md-block">
+      List Reservation
+    </a>
+    <a [routerLink]="['/']" role="button" class="btn btn-secondary btn-sm mb-2 text-uppercase d-block d-md-none">
+      List Reservation
+    </a>
+  </div>
+</app-home-top-banner>
+<div class="container-fluid bg-light py-2">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="title">
+              Title
+            </label>
+            <input id="title" type="text" class="form-control" formControlName="title">
+
+            <label for="targetDate">
+              Reservation Date
+            </label>
+            <input id="targetDate" class="form-control" type="text" formControlName="targetDate">
+            <label for="contactId">
+              Contact
+            </label>
+            <input id="contactId" class="form-control" type="text" formControlName="contactId">
+
+            <p>
+              Form Status: {{reservationForm.valid}}
+            </p>
+            <input type="submit" [disabled]="!reservationForm.valid">
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

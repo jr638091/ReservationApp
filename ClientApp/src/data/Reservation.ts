@@ -5,5 +5,6 @@ interface Reservation {
   targetDate: Date
   rating: Number
   isFavorite: Boolean
-  contact: Contact
+  contact: Contact,
+  contactId: Number
 }

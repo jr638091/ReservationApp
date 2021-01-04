@@ -7,6 +7,7 @@ using ReservationApp.Dtos;
 using Microsoft.AspNetCore.JsonPatch;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System;
 
 namespace ReservationApp.Controllers
 {
@@ -24,29 +25,13 @@ namespace ReservationApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ReservationReadDto>> GetReservations()
+        public ActionResult<IEnumerable<ReservationReadDto>> GetReservations([FromQuery] OrderQuery orderQuery, [FromQuery] PaginationQuery paginationQuery)
         {
-            int initial = 1;
-            int count = -1;
-            string orderAttr = "Id";
-            bool descending = false;
-            var queryParams = HttpContext.Request.Query;
-            if (queryParams.Keys.Contains("descending"))
-            {
-                descending = bool.Parse(queryParams["descending"]);
-            }
-            if (queryParams.Keys.Contains("initial"))
-            {
-                initial = int.Parse(queryParams["initial"]);
-            }
-            if (queryParams.Keys.Contains("count"))
-            {
-                count = int.Parse(queryParams["count"]);
-            }
-            if (queryParams.Keys.Contains("order"))
-            {
-                orderAttr = typeof(Reservation).GetProperty(orderAttr) != null ? queryParams["order"] : "Id";
-            }
+            string orderAttr;
+            bool descending = orderQuery.Descending;
+            if (orderQuery.Order != null)
+                orderAttr = typeof(Reservation).GetProperty(orderQuery.Order) != null ? orderQuery.Order : "Id";
+            else orderAttr = "Id";
             IQueryable<Reservation> query = _repository.ListReservations();
             query = query.OrderBy(orderAttr);
 
@@ -56,19 +41,24 @@ namespace ReservationApp.Controllers
             }
             int countItems = query.Count();
             // ICollection<Reservation> items = query.ToList();
-            if (count > 0)
+
+            if (paginationQuery.PageIndex > 0)
             {
-                if (initial > countItems)
+                var paginated = query.PageResult(paginationQuery.PageIndex, paginationQuery.Count);
+                string next = paginationQuery.PageIndex
+                              >= paginated.PageCount ? null : $"{HttpContext.Request.Path}?pageIndex={paginated.CurrentPage + 1}&count={paginated.PageSize}";
+                string prev = paginationQuery.PageIndex
+                              <= 1 ? null : $"{HttpContext.Request.Path}?pageIndex={paginated.CurrentPage - 1}&count={paginationQuery.Count}";
+                if (orderQuery.Order != null)
                 {
-                    return Ok(new PaginationResult<ReservationReadDto>(new List<ReservationReadDto>(), countItems, 0, initial));
+                    next = next != null ? next + $"&order={orderQuery.Order}&descending={orderQuery.Descending}" : next;
+                    prev = prev != null ? prev + $"&order={orderQuery.Order}&descending={orderQuery.Descending}" : prev;
                 }
-                else
-                {
-                    query = query.Skip(initial - 1).Take(count);
-                }
+
+                return Ok(new PaginationResult<ReservationReadDto>(_mapper.Map<ICollection<ReservationReadDto>>(paginated.Queryable.ToList()), countItems, paginated.PageSize, paginated.CurrentPage, next, prev));
             }
             ICollection<Reservation> items = query.ToList();
-            PaginationResult<ReservationReadDto> result = new PaginationResult<ReservationReadDto>(_mapper.Map<ICollection<ReservationReadDto>>(items), countItems, items.Count, 1);
+            PaginationResult<ReservationReadDto> result = new PaginationResult<ReservationReadDto>(_mapper.Map<ICollection<ReservationReadDto>>(items), countItems, items.Count, 0, null, null);
             return Ok(result);
         }
 
@@ -92,9 +82,11 @@ namespace ReservationApp.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateReservation(long id, ReservationCreateDto reservation) {
+        public ActionResult UpdateReservation(long id, ReservationCreateDto reservation)
+        {
             var reservationModel = _repository.ReadReservation(id);
-            if (reservationModel == null) {
+            if (reservationModel == null)
+            {
                 return NotFound();
             }
             _mapper.Map(reservation, reservationModel);
@@ -106,16 +98,19 @@ namespace ReservationApp.Controllers
         }
 
         [HttpPatch("{id}")]
-        public ActionResult PartialUpdateReservation(long id, JsonPatchDocument<ReservationCreateDto> patchDoc) {
+        public ActionResult PartialUpdateReservation(long id, JsonPatchDocument<ReservationCreateDto> patchDoc)
+        {
             var reservationModel = _repository.ReadReservation(id);
-            if (reservationModel == null) {
+            if (reservationModel == null)
+            {
                 return NotFound();
             }
 
             var reservationToPatch = _mapper.Map<ReservationCreateDto>(reservationModel);
             patchDoc.ApplyTo(reservationToPatch, ModelState);
 
-            if(!TryValidateModel(reservationToPatch)) {
+            if (!TryValidateModel(reservationToPatch))
+            {
                 return ValidationProblem(ModelState);
             }
 

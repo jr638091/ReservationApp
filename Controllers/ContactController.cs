@@ -26,29 +26,13 @@ namespace ReservationApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ContactReadDto>> GetContacts()
+        public ActionResult<IEnumerable<ContactReadDto>> GetContacts([FromQuery] OrderQuery orderQuery, [FromQuery] PaginationQuery paginationQuery)
         {
-            int initial = 1;
-            int count = -1;
-            string orderAttr = "Id";
-            bool descending = false;
-            var queryParams = HttpContext.Request.Query;
-            if (queryParams.Keys.Contains("descending"))
-            {
-                descending = bool.Parse(queryParams["descending"]);
-            }
-            if (queryParams.Keys.Contains("initial"))
-            {
-                initial = int.Parse(queryParams["initial"]);
-            }
-            if (queryParams.Keys.Contains("count"))
-            {
-                count = int.Parse(queryParams["count"]);
-            }
-            if (queryParams.Keys.Contains("order"))
-            {
-                orderAttr = typeof(Contact).GetProperty(orderAttr) != null ? queryParams["order"] : "Id";
-            }
+            string orderAttr;
+            bool descending = orderQuery.Descending;
+            if (orderQuery.Order != null)
+                orderAttr = typeof(Contact).GetProperty(orderQuery.Order) != null ? orderQuery.Order : "Id";
+            else orderAttr = "Id";
             IQueryable<Contact> query = _repository.ListContacts();
             query = query.OrderBy(orderAttr);
 
@@ -58,19 +42,23 @@ namespace ReservationApp.Controllers
             }
             int countItems = query.Count();
             // ICollection<Contact> items = query.ToList();
-            if (count > 0)
+            
+            if (paginationQuery.PageIndex > 0)
             {
-                if (initial > countItems)
-                {
-                    return Ok(new PaginationResult<ContactReadDto>(new List<ContactReadDto>(), countItems, 0, initial));
+                var paginated = query.PageResult(paginationQuery.PageIndex, paginationQuery.Count);
+                string next = paginationQuery.PageIndex
+                              >= paginated.PageCount ? null : $"{HttpContext.Request.Path}?pageIndex={paginated.CurrentPage + 1}&count={paginated.PageSize}";
+                string prev = paginationQuery.PageIndex
+                              <= 1 ? null : $"{HttpContext.Request.Path}?pageIndex={paginated.CurrentPage - 1}&count={paginationQuery.Count}";
+                if(orderQuery.Order != null) {
+                    next = next != null ? next + $"&order={orderQuery.Order}&descending={orderQuery.Descending}" : next;
+                    prev = prev != null ? prev + $"&order={orderQuery.Order}&descending={orderQuery.Descending}" : prev;
                 }
-                else
-                {
-                    query = query.Skip(initial - 1).Take(count);
-                }
+                
+                return Ok(new PaginationResult<ContactReadDto>(_mapper.Map<ICollection<ContactReadDto>>(paginated.Queryable.ToList()), countItems, paginated.PageSize, paginated.CurrentPage, next, prev));
             }
             ICollection<Contact> items = query.ToList();
-            PaginationResult<ContactReadDto> result = new PaginationResult<ContactReadDto>(_mapper.Map<ICollection<ContactReadDto>>(items), countItems, items.Count, 1);
+            PaginationResult<ContactReadDto> result = new PaginationResult<ContactReadDto>(_mapper.Map<ICollection<ContactReadDto>>(items), countItems, items.Count, 0, null, null);
             return Ok(result);
         }
 

@@ -1,12 +1,12 @@
 export default class ReservationComparers {
-  protected static ReservationComparerByDate = { order: "targetDate" };
-  protected static ReservationComparerByRanking = { order: "rating" };
-  protected static ReservationComparerByTitle = { order: "title" };
+  protected static ReservationComparerByDate = { order: "TargetDate" };
+  protected static ReservationComparerByRanking = { order: "Rating" };
+  protected static ReservationComparerByTitle = { order: "Title" };
 
   static orders = [
     {
       label: 'By Date Ascending',
-      value: {...ReservationComparers.ReservationComparerByDate}
+      value: {...ReservationComparers.ReservationComparerByDate, descending: false}
     },
     {
       label: 'By Date Descending',
@@ -14,7 +14,7 @@ export default class ReservationComparers {
     },
     {
       label: 'By Alphabetic Ascending',
-      value: {...ReservationComparers.ReservationComparerByTitle}
+      value: {...ReservationComparers.ReservationComparerByTitle, descending: false}
     },
     {
       label: 'By Alphabetic Descending',
@@ -22,7 +22,7 @@ export default class ReservationComparers {
     },
     {
       label: 'By Rating Ascending',
-      value: {...ReservationComparers.ReservationComparerByRanking}
+      value: {...ReservationComparers.ReservationComparerByRanking, descending: false}
     },
     {
       label: 'By Rating Descending',
