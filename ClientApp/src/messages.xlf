@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" target-language="es" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1b10d9efa4fe4f883651e4e2581a825864ee856c" datatype="html">
+        <source>Create your reservation</source>
+        <target>Cree su reservación</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="18671b48afe2a38fa9fa71ae9671dd8fd3c4d724" datatype="html">
+        <source>
+      List Reservation
+    </source>
+    <traget>Lista de reservaciones</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30384a9d1caef760b8df915cc995139afedb5686" datatype="html">
+        <source>
+                  Title
+                </source>
+                <traget>Título</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="84864662f235c37a606e98e4385dfc906ae71ba1" datatype="html">
+        <source>Title is a required
+                  field!</source>
+                  <traget>El campo título es requerido!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7f239ddbe574fdc49ba545afcfb43dde37649242" datatype="html">
+        <source>Reservation date</source>
+        <traget>Fecha de reservación</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f4e3ca42100e632e23624d1f1f5648cdbd80a982" datatype="html">
+        <source>Date for
+                  reservation is a required field!</source>
+                  <traget>El campo fecha es requerido!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cc152d6ad1ab40e9667e1ea4a2143b1fcd5951cc" datatype="html">
+        <source>Reservation time:</source>
+        <traget>Hora de reservación</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d0ab682029acfa5cf8ce580ee0abc804b85ea28f" datatype="html">
+        <source>Time for
+                  reservation is a required field!</source>
+                  <traget>El campo hora de requerido!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3b368a0d65fac81f1f2fb991dfa4b8b340be856a" datatype="html">
+        <source>
+                  Contact
+                </source>
+                <traget>Contacto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ee7f587914f0084c71a7b2abc841118c9c2b0e3f" datatype="html">
+        <source>Contact is a
+                  required field!</source>
+                  <traget>El campo contacto es requerido!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a49ae0e8cfad21d82066554dbaf528e1e1d40d9a" datatype="html">
+        <source>
+              Create reservation
+            </source>
+            <traget>Crea su reservación</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-create/reservation-create.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="94bd53886c5051c51d9d23f9be51910684f0231a" datatype="html">
+        <source>
+    Reservations List
+  </source>
+        <traget>Lista de reservaciones</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5a950157eaca618a9cb4d4735a64bac4159dabd1" datatype="html">
+        <source>
+      Create reservation
+    </source>
+    <traget>Crea su reservación</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4cace7c289176caa64c27952824301b9fc20e70d" datatype="html">
+        <source>
+              Edit
+            </source>
+            <traget>Editar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="98fa47df386ec2653f4390367451ac80c0b09c27" datatype="html">
+        <source>
+              Ranking
+            </source>
+            <traget>Ranking</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="15098510f66f19d45c2aa8578705f412afb649b3" datatype="html">
+        <source> Add Favorites</source>
+        <traget>Agregar a forvitos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b9e806e7d3b649b80eca4cd6a03f98b3ba632d8d" datatype="html">
+        <source>
+                Edit
+              </source>
+              <traget>Editar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9b475bb63675494482effde989c7f1f18c232620" datatype="html">
+        <source>Contacts</source>
+        <traget>Contactos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="db8b3d012fe4c3285f033a24d79e55a23fc0f502" datatype="html">
+        <source>Create/Edit Contact</source>
+        <traget>Crear/Editar contactos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d54f46c55d76a3424483b6c083766744b56fa349" datatype="html">
+        <source>
+                  Birthday Date
+                </source>
+                <traget>Fecha de cumpleaños</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="616e206cb4f25bd5885fc35925365e43cf5fb929" datatype="html">
+        <source>Name:</source>
+        <traget>Nombre:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="715e3a7c798e9f94fc65263175a3fe62e05299a6" datatype="html">
+        <source>Name
+                      is a
+                      required
+                      field!</source>
+                      <traget>Le campo nombre es requerido!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dc50548ca2ec06aefe651531615003ac69f9bf5d" datatype="html">
+        <source>Birthday Date</source>
+        <traget>Fecha de cumpleaños</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="40527e5d0c1351ac73b65a223fdff83655baa059" datatype="html">
+        <source>
+                      Birthday Date is required field</source>
+                      <traget>El campo cumpleaños es requerido!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9988ada51fbf826595b77a8de10fdcea198b4e82" datatype="html">
+        <source>Phone Number:</source>
+        <traget>Número de telefono:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0ec72ab59e71c5d07754062a27f4fbdab659c6d7" datatype="html">
+        <source>
+                      Phone must contain between 10 and 15 digits</source>
+                      <traget>El número de teléfono debe tener entre 10 y 15 dígitos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0798c50d8cf6b2325faf5a7d73aa7505d663eaf" datatype="html">
+        <source>
+                      Contact Type
+                    </source>
+                    <traget>Tyipo de Contacto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="73045b01c2f0ea993f08736864033dc7ad1b629f" datatype="html">
+        <source>
+                      Contact Type is required field</source>
+                      <traget>El campo tipo de contacto es requerido!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2cab63a9789c0a3ef2fe3e6f4a61d63e22b9ca6b" datatype="html">
+        <source>
+                  Create Contact
+                </source>
+                <traget>Crear contacto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/contact-modal/contact-modal.component.html</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c9cf468f5bb973507fb55217535ba6721ae5e3f8" datatype="html">
+        <source>Edit your reservation</source>
+        <traget>Edite su reservación</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="73ee1071cd7f564e0da194641d51ab0d6d756186" datatype="html">
+        <source>
+              Edit reservation
+            </source>
+            <traget>Editar reservación</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reservation/reservation-edit/reservation-edit.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
