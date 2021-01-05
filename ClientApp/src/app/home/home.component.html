@@ -1,21 +1,24 @@
 <app-home-top-banner (updateOrder)="changeOrder($event)">
-  <h2 class="">
+  <h2 class="" i18n>
     Reservations List
   </h2>
   <div>
-    <a [routerLink]="['/create-reservation']" role="button" class="btn btn-secondary text-uppercase d-none d-md-block">
+    <a [routerLink]="['/create-reservation']" role="button" class="btn btn-secondary text-uppercase d-none d-md-block" i18n>
       Create reservation
     </a>
-    <a [routerLink]="['/create-reservation']" role="button" class="btn btn-secondary btn-sm mb-2 text-uppercase d-block d-md-none">
+    <a [routerLink]="['/create-reservation']" role="button" class="btn btn-secondary btn-sm mb-2 text-uppercase d-block d-md-none" i18n>
       Create reservation
     </a>
   </div>
-  <app-selector [options]="orders" (updateValue)="changeOrder($event)" class="d-block d-md-none">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down-alt"
+  <app-selector [options]="orders" (updateValue)="changeOrder($event)" class="d-block d-md-none" placeHolder="Sort By">
+    <div class="col-auto">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down-alt"
       viewBox="0 0 16 16" style="height: 25px; width: 25px">
       <path
         d="M3.5 3.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 12.293V3.5zm4 .5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z" />
     </svg>
+    </div>
+
   </app-selector>
 </app-home-top-banner>
 
@@ -37,8 +40,8 @@
             [style.color]="reservation.isFavorite ? 'red' : null" (click)="isFavoriteToogler(reservation.id)"></i>
         </div>
         <div class="col-auto pl-2">
-          <a href="#">
-            <span class="badge badge-secondary py-1 px-3">
+          <a routerLink="edit-reservation/{{reservation.id}}">
+            <span class="badge badge-secondary py-1 px-3" i18n>
               Edit
             </span>
           </a>
@@ -69,12 +72,15 @@
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-4">
-            <app-selector [options]="orders" (updateValue)="changeOrder($event)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            <app-selector [options]="orders" (updateValue)="changeOrder($event)" placeHolder="Sort By">
+              <div class="col-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-sort-down-alt" viewBox="0 0 16 16" style="height: 25px; width: 25px">
                 <path
                   d="M3.5 3.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 12.293V3.5zm4 .5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z" />
               </svg>
+              </div>
+
             </app-selector>
           </div>
         </div>
@@ -89,7 +95,7 @@
             </label>
           </div>
           <div class="col-auto">
-            <label class="font-weight-light mb-0" style="font-size: smaller;">
+            <label class="font-weight-light mb-0" style="font-size: smaller;" i18n>
               Ranking
             </label>
             <br>
@@ -105,7 +111,7 @@
           <div class="col-auto">
             <div class="row justify-content-center align-items-center" (click)="isFavoriteToogler(reservation.id)">
               <div class="col-10 pr-0">
-                <label class="fav-text {{reservation.isFavorite ? 'favorited' : ''}}"> Add Favorites</label>
+                <label class="fav-text {{reservation.isFavorite ? 'favorited' : ''}}" i18n> Add Favorites</label>
 
               </div>
               <div class="col-1 pl-0">
@@ -116,8 +122,8 @@
 
           </div>
           <div class="col-auto">
-            <a href="#">
-              <span class="badge badge-secondary py-2 px-4">
+            <a routerLink="edit-reservation/{{reservation.id}}">
+              <span class="badge badge-secondary py-2 px-4" i18n>
                 Edit
               </span>
             </a>

@@ -66,7 +66,7 @@ export class HomeComponent {
     return Utils.dateToString(new Date(reservation.targetDate), Utils.dateStyles.long)
   }
 
-  rate({ id, rate }) {
+  rate(id, rate) {
     const reservation = this._reservations.results.find((r) => r.id === id);
     const removeRate = rate === reservation.rating;
     const body = removeRate

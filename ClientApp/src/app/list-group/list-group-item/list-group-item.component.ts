@@ -1,16 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
-  selector: 'app-list-group-item',
-  templateUrl: './list-group-item.component.html',
-  styleUrls: ['./list-group-item.component.css']
+  selector: "app-list-group-item",
+  templateUrl: "./list-group-item.component.html",
+  styleUrls: ["./list-group-item.component.css"],
 })
 export class ListGroupItemComponent implements OnInit {
-  @Input() index: Number
+  @Input() index: number;
+  @Output() click = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

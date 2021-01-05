@@ -119,5 +119,13 @@ namespace ReservationApp.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteContactType(long id)
+        {
+            if (!_repository.DeleteContactType(id)) return NotFound();
+            _repository.saveChange();
+            return Ok();
+        }
     }
 }

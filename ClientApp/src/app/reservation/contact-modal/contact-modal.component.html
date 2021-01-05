@@ -1,0 +1,154 @@
+<div *ngIf="showModal" class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" style="display: block; background-color: rgba(128, 128, 128, 0.507) !important;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="height: 85vh;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="toogleModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+              aria-controls="contact" aria-selected="true" (click)="clearContact()" i18n>Contacts</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="contactTypes-tab" data-toggle="tab" href="#contactTypes" role="tab"
+              aria-controls="contactTypes" aria-selected="false" i18n>Create/Edit Contact</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent" *ngIf="fetched">
+          <div class="tab-pane fade show active py-2" id="contact" role="tabpanel" aria-labelledby="home-tab">
+            <app-list-group-item [index]="i" *ngFor="let contact of contactsList; let i=index"
+              >
+              <div class="col-auto" style="line-height: 1rem;">
+                <label>
+                  {{contact.name}}
+                </label>
+                <br>
+                <label style="font-size: 0.8rem; font-weight: normal;">
+                  {{contact.phoneNumber}}
+                </label>
+                <br>
+                <label style="font-size: 0.8rem; font-weight: lighter;">
+                  {{contact.contactType.name}}
+                </label>
+                <br>
+
+              </div>
+              <div class="col-auto">
+                <label style="font-size: medium; font-weight: lighter;" i18n>
+                  Birthday Date
+                </label>
+                <br>
+                <label style="font-size: medium;">
+                  {{getString(contact.birthdayDate)}}
+                </label>
+              </div>
+              <div class="col-auto">
+                <i class="bi bi-trash" style="color: lightcoral;" (click)="removeContact($event, contact.id)"></i>
+              </div>
+            </app-list-group-item>
+          </div>
+          <div class="tab-pane fade py-2" id="contactTypes" role="tabpanel" aria-labelledby="profile-tab">
+            <form (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-12">
+                    <label for="name" i18n>Name:</label>
+                    <input id="name" type="text" class="form-control" [value]="contact['name']"
+                      [class.is-invalid]="nameForm.invalid && nameForm.touched" type="text" class="form-control"
+                      (change)="updateField($event.target.value, 'name', nameForm)" (blur)="mark(nameForm)">
+                    <caption class="{{nameForm.invalid && nameForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " i18n>Name
+                      is a
+                      required
+                      field!</caption>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <label for="birthdayDate" i18n>Birthday Date</label>
+                    <input id="birthdayDate" class="form-control" placeholder="Select date for reservation"
+                      [ngxDatePicker]="dateInstanceSingle"
+                      [class.is-invalid]="birthdayForm.invalid && birthdayForm.touched"
+                      (change)="updateField($event.target.value, 'birthdayDate', birthdayForm)"
+                      (valueChange)="updateField(getDate($event), 'birthdayDate', birthdayForm)">
+                    <ngx-date-picker #dateInstanceSingle [options]="{displayFormat: 'yyyy-MM-dd'}"></ngx-date-picker>
+                    <caption
+                      class="{{birthdayForm.invalid && birthdayForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " i18n>
+                      Birthday Date is required field</caption>
+
+                  </div>
+                  <div class="col-12 mt-2">
+                    <label for="phoneNumber" i18n>Phone Number:</label>
+                    <input id="phoneNumber" type="text" class="form-control"
+                      [value]="contact['phoneNumber']"
+                      [class.is-invalid]="phoneNumberForm.invalid && phoneNumberForm.touched"
+                      (change)="updateField($event.target.value, 'phoneNumber', phoneNumberForm)">
+                    <caption
+                      class="{{phoneNumberForm.invalid && phoneNumberForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " i18n>
+                      Phone must contain between 10 and 15 digits</caption>
+                  </div>
+                  <div class="dropdown col-12 mt-2">
+                    <label for="selectorContact" i18n>
+                      Contact Type
+                    </label>
+                    <button [class.is-invalid]="contactTypeForm.invalid && contactTypeForm.touched"
+                      class="btn form-control w-100"
+                      [style.border-color]="contactTypeForm.invalid && contactTypeForm.touched ? '' : 'grey'"
+                      style="color: grey;" type="button" id="selectorContact" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false" (blur)="mark(contactTypeForm)">
+                      <div class="row justify-content-between">
+                        <div class="col-10">
+                          <div class="row justify-content-begin align-items-center">
+                            <ng-content></ng-content>
+                            <div class="col-auto">
+                              <label class="font-weight-light m-0 p-0">
+                                {{ contact['contactType'] === null ? "Select Contact Type" :
+                                contact['contactType']['name'] }}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="bi bi-caret-down-fill"></i>
+                        </div>
+                      </div>
+
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="selectorButton">
+                      <button class="dropdown-item" type="button" *ngFor="let option of ContactTypeList"
+                        (click)="updateField(option, 'contactType', contactTypeForm)">
+                        <div class="row justify-content-between">
+                          <div class="col-auto">
+                            <label style="color: gray;" class="font-weight-lighter">
+                              {{ option['name'] }}
+                            </label>
+                          </div>
+                          <div class="col-auto">
+                            <i class="bi bi-trash" style="color: lightcoral;"
+                              (click)="deleteContactType($event, option.id)"></i>
+                          </div>
+                        </div>
+                      </button>
+                      <input placeholder="Insert name to create Contact Type" [formControl]="contactTypeName" type="text" class="dropdown-item" (change)="createContactType($event.target.value)">
+                    </div>
+                    <caption
+                      class="{{contactTypeForm.invalid && contactTypeForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " i18n>
+                      Contact Type is required field</caption>
+
+
+                  </div>
+
+                </div>
+                <button type="submit" class="btn btn-sm btn-outline-secondary mt-4" [disabled]="!valid" i18n>
+                  Create Contact
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

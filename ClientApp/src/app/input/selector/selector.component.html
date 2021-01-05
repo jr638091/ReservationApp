@@ -4,24 +4,22 @@
     <div class="row justify-content-between">
       <div class="col-10">
         <div class="row justify-content-begin align-items-center">
-          <div class="col-2">
             <ng-content></ng-content>
-          </div>
-          <div class="col-auto px-0">
+          <div class="col-auto">
             <label class="font-weight-light m-0 p-0">
-              {{ state === null ? 'Sort by' : state['label'] }}
+              {{ state === null ? placeHolder : computedLabel }}
             </label>
           </div>
         </div>
       </div>
-      <div class="col-2">
+      <div class="col-auto">
         <i class="bi bi-caret-down-fill"></i>
       </div>
     </div>
 
   </button>
   <div class="dropdown-menu w-100" aria-labelledby="selectorButton">
-    <button class="dropdown-item" *ngFor="let option of options" (click)="changeState(option)">
+    <button class="dropdown-item" *ngFor="let option of options" (click)="changeState(option['value'])">
       <label style="color: gray;" class="font-weight-lighter">
         {{ option['label'] }}
       </label>

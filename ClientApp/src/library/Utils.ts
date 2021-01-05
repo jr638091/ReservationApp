@@ -1,4 +1,4 @@
-import { logging } from "protractor";
+
 import { environment } from "src/environments/environment";
 
 const dateStyles = {
@@ -18,11 +18,9 @@ const dateStyles = {
     hour12: true,
   },
   short: {
+    year: 'numeric',
     month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
+    day: "numeric"
   },
 };
 export default class Utils {
@@ -31,6 +29,6 @@ export default class Utils {
     if (date.getFullYear() !== (new Date).getFullYear()) {
       dateStyle['year'] = 'numeric'
     }
-    return date.toLocaleTimeString(environment.lang, dateStyle);
+    return date.toLocaleDateString(environment.lang, dateStyle);
   }
 }

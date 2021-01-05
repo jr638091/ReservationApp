@@ -16,11 +16,19 @@ export class ReservationService {
     return this.httpClient.get<Pagination<Reservation>>(this.url, options)
   }
 
+  read(id: Number) : Observable<Reservation>{
+    return this.httpClient.get<Reservation>(this.url + `/${id}`)
+  }
+
+  update(id: Number, reservation: Object) {
+    return this.httpClient.put(this.url + `/${id}`, reservation)
+  }
+
   partialUpdate(id: Number, patch: Object, options: Object = {}) {
     return this.httpClient.patch(this.url + `/${id}`, patch, options)
   }
 
-  create(reservation: Reservation): Observable<Reservation> {
+  create(reservation: Object): Observable<Reservation> {
     return this.httpClient.post<Reservation>(this.url, reservation)
   }
 }
