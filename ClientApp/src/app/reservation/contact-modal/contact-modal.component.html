@@ -11,11 +11,11 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-              aria-controls="contact" aria-selected="true" (click)="clearContact()" i18n>Contacts</a>
+              aria-controls="contact" aria-selected="true" (click)="clearContact()" >Contacts</a>
           </li>
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="contactTypes-tab" data-toggle="tab" href="#contactTypes" role="tab"
-              aria-controls="contactTypes" aria-selected="false" i18n>Create/Edit Contact</a>
+              aria-controls="contactTypes" aria-selected="false" >Create/Edit Contact</a>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent" *ngIf="fetched">
@@ -38,7 +38,7 @@
 
               </div>
               <div class="col-auto">
-                <label style="font-size: medium; font-weight: lighter;" i18n>
+                <label style="font-size: medium; font-weight: lighter;" >
                   Birthday Date
                 </label>
                 <br>
@@ -50,23 +50,38 @@
                 <i class="bi bi-trash" style="color: lightcoral;" (click)="removeContact($event, contact.id)"></i>
               </div>
             </app-list-group-item>
+            <div class="row justify-content-center p-2 w-100 align-items-center">
+              <div class="col-auto">
+                <button class="btn btn-sm btn-outline-secondary" *ngIf="contacts.pageIndex > 1" (click)="movePage(-1)" >
+                  <
+                </button>
+              </div>
+              <p class="m-0 btn-sm btn-secondary">
+                {{contacts.pageIndex}}
+              </p>
+              <div class="col-auto">
+                <button class="btn btn-sm btn-outline-secondary" *ngIf="contacts.pageIndex < pages" (click)="movePage(1)">
+                  >
+                </button>
+              </div>
+            </div>
           </div>
           <div class="tab-pane fade py-2" id="contactTypes" role="tabpanel" aria-labelledby="profile-tab">
             <form (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <div class="row">
                   <div class="col-12">
-                    <label for="name" i18n>Name:</label>
+                    <label for="name" >Name:</label>
                     <input id="name" type="text" class="form-control" [value]="contact['name']"
                       [class.is-invalid]="nameForm.invalid && nameForm.touched" type="text" class="form-control"
                       (change)="updateField($event.target.value, 'name', nameForm)" (blur)="mark(nameForm)">
-                    <caption class="{{nameForm.invalid && nameForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " i18n>Name
+                    <caption class="{{nameForm.invalid && nameForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " >Name
                       is a
                       required
                       field!</caption>
                   </div>
                   <div class="col-12 mt-2">
-                    <label for="birthdayDate" i18n>Birthday Date</label>
+                    <label for="birthdayDate" >Birthday Date</label>
                     <input id="birthdayDate" class="form-control" placeholder="Select date for reservation"
                       [ngxDatePicker]="dateInstanceSingle"
                       [class.is-invalid]="birthdayForm.invalid && birthdayForm.touched"
@@ -74,22 +89,22 @@
                       (valueChange)="updateField(getDate($event), 'birthdayDate', birthdayForm)">
                     <ngx-date-picker #dateInstanceSingle [options]="{displayFormat: 'yyyy-MM-dd'}"></ngx-date-picker>
                     <caption
-                      class="{{birthdayForm.invalid && birthdayForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " i18n>
+                      class="{{birthdayForm.invalid && birthdayForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " >
                       Birthday Date is required field</caption>
 
                   </div>
                   <div class="col-12 mt-2">
-                    <label for="phoneNumber" i18n>Phone Number:</label>
+                    <label for="phoneNumber" >Phone Number:</label>
                     <input id="phoneNumber" type="text" class="form-control"
                       [value]="contact['phoneNumber']"
                       [class.is-invalid]="phoneNumberForm.invalid && phoneNumberForm.touched"
                       (change)="updateField($event.target.value, 'phoneNumber', phoneNumberForm)">
                     <caption
-                      class="{{phoneNumberForm.invalid && phoneNumberForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " i18n>
+                      class="{{phoneNumberForm.invalid && phoneNumberForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " >
                       Phone must contain between 10 and 15 digits</caption>
                   </div>
                   <div class="dropdown col-12 mt-2">
-                    <label for="selectorContact" i18n>
+                    <label for="selectorContact" >
                       Contact Type
                     </label>
                     <button [class.is-invalid]="contactTypeForm.invalid && contactTypeForm.touched"
@@ -134,14 +149,14 @@
                       <input placeholder="Insert name to create Contact Type" [formControl]="contactTypeName" type="text" class="dropdown-item" (change)="createContactType($event.target.value)">
                     </div>
                     <caption
-                      class="{{contactTypeForm.invalid && contactTypeForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " i18n>
+                      class="{{contactTypeForm.invalid && contactTypeForm.touched ? 'invalid-feedback' : 'd-none'}} py-0 " >
                       Contact Type is required field</caption>
 
 
                   </div>
 
                 </div>
-                <button type="submit" class="btn btn-sm btn-outline-secondary mt-4" [disabled]="!valid" i18n>
+                <button type="submit" class="btn btn-sm btn-outline-secondary mt-4" [disabled]="!valid" >
                   Create Contact
                 </button>
               </div>

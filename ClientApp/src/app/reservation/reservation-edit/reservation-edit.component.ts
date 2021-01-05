@@ -97,7 +97,6 @@ export class ReservationEditComponent implements OnInit {
     else {
       this.dateTime['date'] = this.getDate(date as Date)
     }
-    console.log(this.dateTime);
 
     return date
   }
@@ -109,7 +108,6 @@ export class ReservationEditComponent implements OnInit {
     else {
       this.dateTime['time'] = this.getTime(date as Date)
     }
-    console.log(this.dateTime);
     return date
   }
 

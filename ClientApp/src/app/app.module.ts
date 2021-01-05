@@ -49,7 +49,7 @@ import { ReservationEditComponent } from './reservation/reservation-edit/reserva
     NgxDatePickerModule,
     NgxTimePickerModule
   ],
-  providers: [ReservationService, ContactService, {provide: LOCALE_ID, useValue: 'es'}],
+  providers: [ReservationService, ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,12 +1,12 @@
 <app-home-top-banner (updateOrder)="changeOrder($event)">
-  <h2 class="" i18n>
+  <h2 class="" >
     Reservations List
   </h2>
   <div>
-    <a [routerLink]="['/create-reservation']" role="button" class="btn btn-secondary text-uppercase d-none d-md-block" i18n>
+    <a [routerLink]="['/create-reservation']" role="button" class="btn btn-secondary text-uppercase d-none d-md-block" >
       Create reservation
     </a>
-    <a [routerLink]="['/create-reservation']" role="button" class="btn btn-secondary btn-sm mb-2 text-uppercase d-block d-md-none" i18n>
+    <a [routerLink]="['/create-reservation']" role="button" class="btn btn-secondary btn-sm mb-2 text-uppercase d-block d-md-none" >
       Create reservation
     </a>
   </div>
@@ -41,7 +41,7 @@
         </div>
         <div class="col-auto pl-2">
           <a routerLink="edit-reservation/{{reservation.id}}">
-            <span class="badge badge-secondary py-1 px-3" i18n>
+            <span class="badge badge-secondary py-1 px-3" >
               Edit
             </span>
           </a>
@@ -95,7 +95,7 @@
             </label>
           </div>
           <div class="col-auto">
-            <label class="font-weight-light mb-0" style="font-size: smaller;" i18n>
+            <label class="font-weight-light mb-0" style="font-size: smaller;" >
               Ranking
             </label>
             <br>
@@ -111,7 +111,7 @@
           <div class="col-auto">
             <div class="row justify-content-center align-items-center" (click)="isFavoriteToogler(reservation.id)">
               <div class="col-10 pr-0">
-                <label class="fav-text {{reservation.isFavorite ? 'favorited' : ''}}" i18n> Add Favorites</label>
+                <label class="fav-text {{reservation.isFavorite ? 'favorited' : ''}}" > Add Favorites</label>
 
               </div>
               <div class="col-1 pl-0">
@@ -123,7 +123,7 @@
           </div>
           <div class="col-auto">
             <a routerLink="edit-reservation/{{reservation.id}}">
-              <span class="badge badge-secondary py-2 px-4" i18n>
+              <span class="badge badge-secondary py-2 px-4" >
                 Edit
               </span>
             </a>

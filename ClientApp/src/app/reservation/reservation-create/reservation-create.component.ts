@@ -42,6 +42,10 @@ export class ReservationCreateComponent implements OnInit {
     );
   }
 
+  get defaultDate() {
+    return new Date();
+  }
+
   public showModal = false;
 
   constructor(
@@ -89,14 +93,13 @@ export class ReservationCreateComponent implements OnInit {
     if (value === null) {
       this.toogleModal();
       this.selectedItem = null;
-    }
-    else {
+    } else {
       this.contactId.setValue(value);
       this.selectedItem = value;
     }
   }
 
-  updateContacts () {
+  updateContacts() {
     this.contactService.list().subscribe((r) => {
       this.contacts = r.results;
     });
@@ -114,6 +117,5 @@ export class ReservationCreateComponent implements OnInit {
           this.router.navigateByUrl("/");
         });
     }
-    console.log();
   }
 }

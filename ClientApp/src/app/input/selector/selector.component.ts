@@ -14,7 +14,6 @@ export class SelectorInputComponent {
     return this.state;
   }
   set value(value: Object | String | Number) {
-    console.log(value);
 
     this.state = value;
   }
@@ -29,7 +28,6 @@ export class SelectorInputComponent {
   state: Object | String | Number = null;
 
   changeState(value) {
-    console.log(value);
     this.state = value;
     this.updateValue.emit(value);
   }

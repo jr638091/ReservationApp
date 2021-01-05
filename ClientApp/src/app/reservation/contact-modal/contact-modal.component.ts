@@ -23,12 +23,18 @@ export class ContactModalComponent implements OnInit {
     this.showModal = value;
   }
 
+  get pages(): number {
+    if (this.contacts.hits % this.queryParams.count === 0) {
+      return this.contacts.hits / this.queryParams.count;
+    }
+    return Math.ceil(this.contacts.hits / this.queryParams.count);
+  }
+
   get computedDate(): Date {
-    if (this.contact['birthdayDate'] !== null)
-    {
+    if (this.contact["birthdayDate"] !== null) {
       return new Date(this.contact["birthdayDate"]);
     }
-    return new Date()
+    return new Date();
   }
 
   public fetched: Boolean = false;
@@ -110,9 +116,8 @@ export class ContactModalComponent implements OnInit {
     $event.stopPropagation();
     this.contactService.delete(id).subscribe((_) => {
       this.updateContacs.emit();
-      this.contactService.list({ params: this.queryParams }).subscribe((c) => {
-        this.contacts = c;
-      });
+      this.queryParams.pageIndex = 1;
+      this.fetchContacts();
     });
   }
 
@@ -120,6 +125,7 @@ export class ContactModalComponent implements OnInit {
     if (this.showModal) {
       this.clearContact();
     }
+
     this.updateShow.emit(!this.showModal);
   }
 
@@ -150,10 +156,20 @@ export class ContactModalComponent implements OnInit {
     $event.stopPropagation();
     this.contactTypeService.delete(id).subscribe((_) => {
       this.contactTypeService.list().subscribe((r) => (this.contactTypes = r));
-      this.contactService
-        .list({ params: this.queryParams })
-        .subscribe((r) => (this.contacts = r));
+      this.queryParams.pageIndex = 1;
+      this.fetchContacts();
     });
+  }
+
+  movePage(mod: number) {
+    this.queryParams.pageIndex += mod;
+    this.fetchContacts();
+  }
+
+  fetchContacts() {
+    this.contactService
+      .list({ params: this.queryParams })
+      .subscribe((r) => (this.contacts = r));
   }
 
   onSubmit() {
@@ -163,8 +179,9 @@ export class ContactModalComponent implements OnInit {
         contactTypeId: this.contact["contactType"].id,
       })
       .subscribe((r) => {
+        this.fetchContacts();
         this.updateContacs.emit();
-        this.updateShow.emit(false);
+        this.toogleModal();
       });
   }
 }

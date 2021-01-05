@@ -1,10 +1,10 @@
 <app-home-top-banner>
-  <h2 i18n>Edit your reservation</h2>
+  <h2 >Edit your reservation</h2>
   <div>
-    <a [routerLink]="['/']" role="button" class="btn btn-secondary text-uppercase d-none d-md-block" i18n>
+    <a [routerLink]="['/']" role="button" class="btn btn-secondary text-uppercase d-none d-md-block" >
       List Reservation
     </a>
-    <a [routerLink]="['/']" role="button" class="btn btn-secondary btn-sm mb-2 text-uppercase d-block d-md-none" i18n>
+    <a [routerLink]="['/']" role="button" class="btn btn-secondary btn-sm mb-2 text-uppercase d-block d-md-none" >
       List Reservation
     </a>
   </div>
@@ -18,46 +18,46 @@
           <div class="form-group">
             <div class="row">
               <div class="col-12">
-                <label for="title" i18n>
+                <label for="title" >
                   Title
                 </label>
                 <input id="title" [class.is-invalid]="title.invalid && title.touched" type="text" class="form-control"
                   [value]="reservation.title" (change)="updateField($event.target.value, 'title', title)" required
                   placeholder="Write title for reservation">
-                <caption class="{{title.invalid && title.touched ? 'invalid-feedback' : 'd-none'}}" i18n>Title is a required
+                <caption class="{{title.invalid && title.touched ? 'invalid-feedback' : 'd-none'}}" >Title is a required
                   field!</caption>
               </div>
               <div class="col-12 col-md-6 my-2">
-                <label for="targetDate" i18n>Reservation date</label>
+                <label for="targetDate" >Reservation date</label>
                 <input id="targetDate" [class.is-invalid]="targetDate.invalid && targetDate.touched"
                   class="form-control" [value]="reservation.targetDate" placeholder="Select date for reservation"
                   (change)="updateField(saveDate($event.target.value), 'targetDate', targetDate)"
                   [ngxDatePicker]="dateInstanceSingle" (valueChange)="updateField(saveDate($event), 'targetDate', targetDate)"
                   (blur)="mark(targetDate)">
                 <ngx-date-picker #dateInstanceSingle [options]="{displayFormat: 'yyyy-MM-dd'}"></ngx-date-picker>
-                <caption class="{{targetDate.invalid && targetDate.touched ? 'invalid-feedback' : 'd-none'}}" i18n>Date for
+                <caption class="{{targetDate.invalid && targetDate.touched ? 'invalid-feedback' : 'd-none'}}" >Date for
                   reservation is a required field!</caption>
 
               </div>
               <div class="col-12 col-md-6 my-2">
-                <label i18n>Reservation time:</label>
+                <label >Reservation time:</label>
                 <input id="targetTime" [class.is-invalid]="targetTime.invalid && targetTime.touched"
                   class="form-control" placeholder="Select time for reservation" [value]="reservation.targetTime"
                   [ngxTimePicker]="timeInstanceOne"
                   (change)="updateField(saveTime($event.target.value), 'targetTime', targetTime)"
                   (valueChange)="updateField(saveTime($event), 'targetTime', targetTime)" (blur)="mark(targetTime)">
                 <ngx-time-picker #timeInstanceOne [options]="{military: true}"></ngx-time-picker>
-                <caption class="{{targetTime.invalid && targetTime.touched ? 'invalid-feedback' : 'd-none'}}" i18n>Time for
+                <caption class="{{targetTime.invalid && targetTime.touched ? 'invalid-feedback' : 'd-none'}}" >Time for
                   reservation is a required field!</caption>
               </div>
               <div class="col-12 col-md-6">
-                <label for="contactId" i18n>
+                <label for="contactId" >
                   Contact
                 </label>
                 <app-selector [options]="contactsOptions" [value]="reservation.contactId"
                   [class.is-invalid]="!contactId.valid && contactId.touched" placeHolder="Select a contact"
                   (updateValue)="updateContact($event)"></app-selector>
-                <caption class="{{contactId.invalid && contactId.touched ? 'invalid-feedback' : 'd-none'}}" i18n>Contact is a
+                <caption class="{{contactId.invalid && contactId.touched ? 'invalid-feedback' : 'd-none'}}" >Contact is a
                   required field!</caption>
               </div>
             </div>
@@ -66,7 +66,7 @@
 
           </div>
           <div class="card-body text-center">
-            <button type="submit" class="btn btn-sm btn-outline-secondary" i18n>
+            <button type="submit" class="btn btn-sm btn-outline-secondary" >
               Edit reservation
             </button>
           </div>
